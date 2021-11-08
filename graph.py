@@ -29,3 +29,8 @@ class Graph:
     @property
     def n(self) -> int:
         return self._n
+
+    # get adjacency matrix
+    @property
+    def distance(self) -> np.array:
+        return self._distance

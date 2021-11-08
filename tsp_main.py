@@ -11,7 +11,10 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     try:
-        subprocess.run(args=['python3', str(args.alg).lower() + '.py', '-inf', str(args.inf), '-seed', str(args.seed)],
+        subprocess.run(args=['python3', str(args.alg).lower() + '.py',
+                             '-inf', str(args.inf),
+                             '-time', str(args.time),
+                             '-seed', str(args.seed)],
                        timeout=int(args.time))
     except subprocess.TimeoutExpired:
         pass
