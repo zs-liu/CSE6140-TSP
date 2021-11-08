@@ -1,0 +1,11 @@
+*.xlsx
+*.txt
+*.csv
+*.iml
+*.xml
+*.pyc
+*.pkl
+.idea/
+project_description.pdf
+DATA/
+__pycache__/
