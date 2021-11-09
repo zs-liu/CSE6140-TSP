@@ -10,9 +10,8 @@ if __name__ == '__main__':
     start = time.time()
     parser = argparse.ArgumentParser()
     parser.add_argument('-inf', action='store', dest='inf')
-    parser.add_argument('-time', action='store', dest='time', default=10)
-    parser.add_argument('-seed', action='store', dest='seed', default=0)
-    args = parser.parse_args()
+    parser.add_argument('-time', action='store', dest='time', default=1)
+    args, unknown = parser.parse_known_args()
 
     # load graph
     graph = Graph(args.inf)

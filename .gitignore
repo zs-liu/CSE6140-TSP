@@ -8,4 +8,5 @@
 .idea/
 project_description.pdf
 DATA/
+OUT/
 __pycache__/
