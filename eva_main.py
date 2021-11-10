@@ -7,7 +7,8 @@ if __name__ == '__main__':
     parser.add_argument('-i', action='store', dest='i', default='DATA/')
     parser.add_argument('-o', action='store', dest='o', default='output/')
     parser.add_argument('-run', action='store', dest='run', default='F', choices=['T', 'F'])
-    parser.add_argument('-alg', action='store', dest='alg', default='all', choices=['BnB', 'Approx', 'LS1', 'LS2', 'all'])
+    parser.add_argument('-alg', action='store', dest='alg', default='all',
+                        choices=['BnB', 'Approx', 'LS1', 'LS2', 'all'])
     args, unknown = parser.parse_known_args()
 
     if args.run == 'T':
@@ -24,7 +25,9 @@ if __name__ == '__main__':
 
     if args.out == 'table':
         from evaluate import table_out
-        table_out(in_dir=args.i, out_dir=args.o, alg=args.alg, run=args.run)
-    elif args.out == 'grtd':
-        from evaluate import grtd_out
 
+        table_out(in_dir=args.i, out_dir=args.o, alg=args.alg, run=args.run)
+    elif args.out == 'qrtd':
+        from evaluate import qrtd_out
+
+        qrtd_out(in_dir=args.i, out_dir=args.o, alg=args.alg, run=args.run)
