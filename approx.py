@@ -31,13 +31,13 @@ if __name__ == '__main__':
     delta = time.time() - start
 
     # output solution file
-    solution_file = '{}_{}_{}.sol'.format(args.inf[:-4], 'Approx', args.time)
+    solution_file = '{}_{}_{}.sol'.format('output/' + args.inf.split('/')[-1][:-4], 'Approx', args.time)
     with open(solution_file, 'w') as f:
         f.write(str(length))
         f.write('\n')
         f.write(','.join(map(str, node_list)))
 
     # output trace file
-    trace_file = '{}_{}_{}.trace'.format(args.inf[:-4], 'Approx', args.time)
+    trace_file = '{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'Approx', args.time)
     with open(trace_file, 'w') as f:
         f.write('{:.2f}, {}'.format(delta, length))

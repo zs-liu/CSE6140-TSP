@@ -9,4 +9,5 @@
 project_description.pdf
 DATA/
 OUT/
+output/
 __pycache__/
