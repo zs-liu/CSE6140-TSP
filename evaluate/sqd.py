@@ -5,12 +5,12 @@ from evaluate import _check_run
 
 ls_timeout = 600
 ls_seed_list = list(range(0, 1))
-q_list = [x / 100 for x in [0.0, 0.1, 0.2, 0.5, 1.0]]
+t_list = [100, 200, 300, 400, 500, 600]
 
 instances = ['Atlanta']
 
 
-def qrtd_out(in_dir: str, out_dir: str, alg: list, run: bool):
+def sqd_out(in_dir: str, out_dir: str, alg: list, run: bool):
     solutions = pd.read_csv(in_dir + 'solutions.csv')
     for _alg in alg:
         for instance in instances:
@@ -23,16 +23,16 @@ def qrtd_out(in_dir: str, out_dir: str, alg: list, run: bool):
                 time_qual_list.append(pd.read_csv(file, names=['_time', '_qual']))
             time_qual = pd.concat(time_qual_list, ignore_index=True)
             time_qual = time_qual.assign(rel_qual=(time_qual['_qual'] - solution) / solution)
-            time_qual = time_qual.sort_values('_time')
+            time_qual = time_qual.sort_values('rel_qual')
 
             fig, ax = plt.subplots(nrows=1, ncols=1, dpi=150)
-            ax.set_xlabel("Running time", fontweight="bold")
+            ax.set_xlabel("Relative error", fontweight="bold")
             ax.set_ylabel("Percent", fontweight="bold")
-            for q in q_list:
-                mask = time_qual[time_qual['rel_qual'] <= q]
-                ax.step(list(mask['_time'].array), np.arange(1, mask.shape[0] + 1) / time_qual.shape[0],
-                        label=u'q={:0.0f}‰'.format(q * 1000))
+            for t in t_list:
+                mask = time_qual[time_qual['_time'] <= t]
+                ax.step(list(mask['rel_qual'].array), np.arange(1, mask.shape[0] + 1) / time_qual.shape[0],
+                        label=u't={:0.0f}'.format(t))
             ax.legend(loc='best')
-            fig_file = out_dir + _alg + instance.lower() + '_qrtd.pdf'
+            fig_file = out_dir + _alg + instance.lower() + '_sqd.pdf'
             fig.savefig(fig_file)
             plt.close(fig)

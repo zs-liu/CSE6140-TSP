@@ -3,7 +3,8 @@ import subprocess
 import pandas as pd
 
 
-def _check_run(in_dir: str, out_dir: str, alg_name: str, timeout: int, run: bool, seed: int = None, instances: list = None) -> None:
+def _check_run(in_dir: str, out_dir: str, alg_name: str, timeout: int, run: bool, seed: int = None,
+               instances: list = None) -> None:
     solutions = pd.read_csv(in_dir + 'solutions.csv')
     for _, row in solutions.iterrows():
         if instances is not None and not (row['Instance'] in instances):
