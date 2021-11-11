@@ -35,3 +35,7 @@ if __name__ == '__main__':
         from evaluate import sqd_out
 
         sqd_out(in_dir=args.i, out_dir=args.o, alg=args.alg, run=args.run)
+    elif args.out == 'box':
+        from evaluate import box_out
+
+        box_out(in_dir=args.i, out_dir=args.o, alg=args.alg, run=args.run)
