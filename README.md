@@ -25,5 +25,5 @@ Gatech CSE6140/CX4140 Fall 2021 TSP Project
 - `graph.py`: load graph from datasets
 - `bnb.py`: solve TSP with Branch-and-Bound
 - `approx.py`: solve TSP with MST-APPROX
-- `ls1.py`: solve TSP with ???
+- `ls1.py`: solve TSP with 
 - `ls2.py`: solve TSP with ???
