@@ -26,4 +26,4 @@ Gatech CSE6140/CX4140 Fall 2021 TSP Project
 - `bnb.py`: solve TSP with Branch-and-Bound
 - `approx.py`: solve TSP with MST-APPROX
 - `ls1.py`: solve TSP with SA
-- `ls2.py`: solve TSP with ???
+- `ls2.py`: solve TSP with 3-opt
