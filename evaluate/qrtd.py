@@ -6,7 +6,7 @@ from evaluate import _check_run
 plt.rcParams["font.family"] = "Linux Libertine O"
 
 ls_timeout = 600
-ls_seed_list = list(range(0, 2))
+ls_seed_list = list(range(0, 10))
 q_list = [x for x in [0.0, 0.1, 0.2, 0.5, 1.0]]
 
 instances = ['Atlanta']
@@ -34,7 +34,8 @@ def qrtd_out(in_dir: str, out_dir: str, alg: list, run: bool):
                     if time_qual.shape[0] != 0:
                         time_list.append(np.min(time_qual['_time']))
                 if len(time_list) != 0:
-                    ax.step([0] + time_list, np.arange(0, len(ls_seed_list) + 1) / len(ls_seed_list),
+                    time_list.sort()
+                    ax.step([0] + time_list, np.arange(0, len(time_list) + 1) / len(ls_seed_list),
                             label=u'q={:0.0f}%'.format(q * 100), where='post')
             ax.legend(loc='best')
             fig_file = out_dir + _alg + instance.lower() + '_qrtd.pdf'

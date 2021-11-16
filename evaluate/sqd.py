@@ -6,7 +6,7 @@ from evaluate import _check_run
 plt.rcParams["font.family"] = "Linux Libertine O"
 
 ls_timeout = 600
-ls_seed_list = list(range(0, 1))
+ls_seed_list = list(range(0, 10))
 t_list = [100, 200, 300, 400, 500, 600]
 
 instances = ['Atlanta']
@@ -34,7 +34,9 @@ def sqd_out(in_dir: str, out_dir: str, alg: list, run: bool):
                     if time_qual.shape[0] != 0:
                         qual_list.append(np.min(time_qual['rel_qual']))
                 if len(qual_list) != 0:
-                    ax.step([0] + qual_list, np.arange(0, len(ls_seed_list) + 1) / len(ls_seed_list),
+                    qual_list.sort()
+                    print(qual_list)
+                    ax.step([0] + qual_list, np.arange(0, len(qual_list) + 1) / len(ls_seed_list),
                             label=u't={:0.2f}s'.format(t), where='post')
             ax.legend(loc='best')
             fig_file = out_dir + _alg + instance.lower() + '_sqd.pdf'

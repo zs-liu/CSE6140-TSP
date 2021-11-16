@@ -40,6 +40,6 @@ def box_out(in_dir: str, out_dir: str, alg: list, run: bool):
                     label_lists.append(u'q={:0.0f}%'.format(q * 100))
             ax.boxplot(time_lists, whis=(0.0, 100.0), labels=label_lists)
             ax.legend(loc='best')
-            fig_file = out_dir + _alg + instance.lower() + '_qrtd.pdf'
+            fig_file = out_dir + _alg + instance.lower() + '_box.pdf'
             fig.savefig(fig_file)
             plt.close(fig)
