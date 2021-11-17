@@ -11,7 +11,10 @@ class Graph:
                 next(f)
             # load coordinates from the file
             coords = []
-            while (line := f.readline().strip()) != 'EOF':
+            while True:
+                line = f.readline().strip()
+                if line == 'EOF':
+                    break
                 _, coord_x, coord_y = line.split(' ')
                 coords.append((coord_x, coord_y))
         coords = np.array(coords)

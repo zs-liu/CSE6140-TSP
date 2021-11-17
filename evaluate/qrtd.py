@@ -7,9 +7,9 @@ plt.rcParams["font.family"] = "Linux Libertine O"
 
 ls_timeout = 600
 ls_seed_list = list(range(0, 10))
-q_list = [x for x in [0.0, 0.1, 0.2, 0.5, 1.0]]
+q_list = [x / 100 for x in [0.0, 1, 2, 5, 10, 20, 30]]
 
-instances = ['Atlanta']
+instances = ['Atlanta', 'SanFrancisco']
 
 
 def qrtd_out(in_dir: str, out_dir: str, alg: list, run: bool):

@@ -55,14 +55,14 @@ if __name__ == '__main__':
                     improved = True
         # output solution file
         if improved:
-            solution_file = '{}_{}_{}_{}.sol'.format('output/' + args.inf.split('/')[-1][:-4], 'ls2',
+            solution_file = '{}_{}_{}_{}.sol'.format('output/' + args.inf.split('/')[-1][:-4], 'LS2',
                                                      args.time, args.seed)
             with open(solution_file, 'w') as f:
                 f.write(str(distance))
                 f.write('\n')
                 f.write(','.join(map(str, tour)))
 
-            trace_file = '{}_{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'ls2',
+            trace_file = '{}_{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'LS2',
                                                     args.time, args.seed)
             delta = time.time() - start
             with open(trace_file, 'a') as f:
