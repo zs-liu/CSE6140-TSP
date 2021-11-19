@@ -7,7 +7,6 @@ import sys
 import time
 import networkx as nx
 from BranchState import BranchState
-# from graph import Graph
 
 class BranchAndBound:
     def __init__(self, graph, limit=600):
@@ -124,10 +123,7 @@ if __name__ == '__main__':
     if os.path.isfile(trace_file):
         os.remove(trace_file)
 
-    # set the initial tour from 0 to 0
-    # tour = list(np.random.permutation(list(range(0, graph.n))))
-    # # tour = list(range(0, graph.n))
-    # tour = tour + [tour[0]]
+
     bnb = BranchAndBound(graph, args.time)
     tour = bnb.generate_tour()
 
