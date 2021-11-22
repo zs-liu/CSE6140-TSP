@@ -88,7 +88,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-inf', action='store', dest='inf')
     parser.add_argument('-time', action='store', dest='time', default=1)
-    parser.add_argument('-seed', action='store', dest='seed', default=0)
+ 
     args, unknown = parser.parse_known_args()
     # load graph
     # graph = Graph(args.inf)
@@ -118,8 +118,8 @@ if __name__ == '__main__':
     print(graph.number_of_nodes(), "nnnnnn")
     np.random.seed(int(args.seed))
     # test with relative path
-    trace_file = '{}_{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'BNB',
-                                            args.time, args.seed)
+    trace_file = '{}_{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'bnb',
+                                            args.time)
     if os.path.isfile(trace_file):
         os.remove(trace_file)
 
@@ -128,15 +128,15 @@ if __name__ == '__main__':
     tour = bnb.generate_tour()
 
     # output solution file
-    solution_file = '{}_{}_{}_{}.sol'.format('output/' + args.inf.split('/')[-1][:-4], 'BNB',
-                                             args.time, args.seed)
+    solution_file = '{}_{}_{}_{}.sol'.format('output/' + args.inf.split('/')[-1][:-4], 'bnb',
+                                             args.time)
     with open(solution_file, 'w') as f:
         f.write(str(distance))
         f.write('\n')
         f.write(','.join(map(str, tour)))
 
-    trace_file = '{}_{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'BNB',
-                                            args.time, args.seed)
+    trace_file = '{}_{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'bnb',
+                                            args.time)
     delta = time.time() - start
     with open(trace_file, 'a') as f:
         f.write('{:.2f}, {}\n'.format(delta, distance))
