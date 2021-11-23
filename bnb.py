@@ -119,7 +119,7 @@ if __name__ == '__main__':
     print(graph.number_of_nodes(), "nnnnnn")
     #np.random.seed(int(args.seed))
     # test with relative path
-    trace_file = '{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'BNB',
+    trace_file = '{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'bnb',
                                             args.time)
     if os.path.isfile(trace_file):
         os.remove(trace_file)
@@ -129,14 +129,14 @@ if __name__ == '__main__':
     tour = bnb.generate_tour()
     print (tour)
     # output solution file
-    solution_file = '{}_{}_{}.sol'.format('output/' + args.inf.split('/')[-1][:-4], 'BNB',
+    solution_file = '{}_{}_{}.sol'.format('output/' + args.inf.split('/')[-1][:-4], 'bnb',
                                              args.time)
     with open(solution_file, 'w') as f:
         #f.write(str(distance))
         f.write('\n')
         f.write(','.join(map(str, tour)))
 
-    trace_file = '{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'BNB',
+    trace_file = '{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'bnb',
                                             args.time)
     delta = time.time() - start
     #ith open(trace_file, 'a') as f:
