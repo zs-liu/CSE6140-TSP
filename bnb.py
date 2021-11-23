@@ -6,7 +6,9 @@ import os
 import sys
 import time
 import networkx as nx
+
 from BranchState import BranchState
+from graph import Graph
 
 class BranchAndBound:
     def __init__(self, graph, limit=600):
@@ -88,10 +90,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-inf', action='store', dest='inf')
     parser.add_argument('-time', action='store', dest='time', default=1)
- 
+
     args, unknown = parser.parse_known_args()
-    # load graph
-    # graph = Graph(args.inf)
+
     city_dict = {}
     with open(args.inf) as f:
         while True:
@@ -116,9 +117,9 @@ if __name__ == '__main__':
                 graph.add_node(v)
                 graph.add_edge(u, v, weight=val)
     print(graph.number_of_nodes(), "nnnnnn")
-    np.random.seed(int(args.seed))
+    #np.random.seed(int(args.seed))
     # test with relative path
-    trace_file = '{}_{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'bnb',
+    trace_file = '{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'BNB',
                                             args.time)
     if os.path.isfile(trace_file):
         os.remove(trace_file)
@@ -126,18 +127,18 @@ if __name__ == '__main__':
 
     bnb = BranchAndBound(graph, args.time)
     tour = bnb.generate_tour()
-
+    print (tour)
     # output solution file
-    solution_file = '{}_{}_{}_{}.sol'.format('output/' + args.inf.split('/')[-1][:-4], 'bnb',
+    solution_file = '{}_{}_{}.sol'.format('output/' + args.inf.split('/')[-1][:-4], 'BNB',
                                              args.time)
     with open(solution_file, 'w') as f:
-        f.write(str(distance))
+        #f.write(str(distance))
         f.write('\n')
         f.write(','.join(map(str, tour)))
 
-    trace_file = '{}_{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'bnb',
+    trace_file = '{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'BNB',
                                             args.time)
     delta = time.time() - start
-    with open(trace_file, 'a') as f:
-        f.write('{:.2f}, {}\n'.format(delta, distance))
+    #ith open(trace_file, 'a') as f:
+        #f.write('{:.2f}, {}\n'.format(delta, distance))
 
