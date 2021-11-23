@@ -131,7 +131,7 @@ if __name__ == '__main__':
     # output solution file
     solution_file = '{}_{}_{}.sol'.format('output/' + args.inf.split('/')[-1][:-4], 'bnb',
                                              args.time)
-    with open(solution_file, 'w') as f:
+    with open(solution_file, 'w+') as f:
         #f.write(str(distance))
         f.write('\n')
         f.write(','.join(map(str, tour)))
