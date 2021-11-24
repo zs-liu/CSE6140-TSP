@@ -2,9 +2,7 @@ import os
 import numpy as np
 import pandas as pd
 from evaluate import _check_run
-
-ls_timeout = 600
-ls_seed_list = list(range(0, 10))
+from .parameters import ls_timeout, ls_seed_list
 
 
 def _get_result(in_dir: str, out_dir: str, alg_name: str, timeout: int, seed: int = None) -> pd.DataFrame:

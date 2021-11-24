@@ -2,14 +2,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from evaluate import _check_run
+from .parameters import ls_timeout, ls_seed_list, t_list, instances
 
 plt.rcParams["font.family"] = "Linux Libertine O"
-
-ls_timeout = 600
-ls_seed_list = list(range(0, 10))
-t_list = [100, 200, 300, 400, 500, 600]
-
-instances = ['Atlanta']
 
 
 def sqd_out(in_dir: str, out_dir: str, alg: list, run: bool):
