@@ -11,7 +11,7 @@ from BranchState import BranchState
 from graph import Graph
 
 class BranchAndBound:
-    def __init__(self, graph, limit=6000):
+    def __init__(self, graph, limit=600):
         self.graph = graph
         self.winner = None
         self.results = []
