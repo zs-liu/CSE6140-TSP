@@ -2,6 +2,10 @@ import subprocess
 import argparse
 
 if __name__ == '__main__':
+    
+    if not os.path.exists('output/'):
+        os.makedirs('output/')
+
     parser = argparse.ArgumentParser()
     parser.add_argument('-inf', action='store', dest='inf')
     parser.add_argument('-alg', action='store', dest='alg', default='BnB', choices=['BnB', 'Approx', 'LS1', 'LS2'])

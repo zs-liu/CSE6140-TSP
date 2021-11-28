@@ -4,6 +4,8 @@ import pandas as pd
 from evaluate import _check_run
 from .parameters import ls_timeout, ls_seed_list
 
+ls_seed_list = list(range(0, 10))
+
 
 def _get_result(in_dir: str, out_dir: str, alg_name: str, timeout: int, seed: int = None) -> pd.DataFrame:
     solutions = pd.read_csv(in_dir + 'solutions.csv')
@@ -39,13 +41,13 @@ def table_out(in_dir: str, out_dir: str, alg: list, run: bool) -> None:
     if 'bnb' in alg:
         _check_run(in_dir=in_dir, out_dir=out_dir, alg_name='BnB', timeout=600, run=run, seed=None)
         solutions = _get_result(in_dir=in_dir, out_dir=out_dir, alg_name='BnB', timeout=600, seed=None)
-        output_file = out_dir + 'bnb_table.tex'
+        output_file = out_dir + 'eva/' + 'bnb_table.tex'
         _output_table(output_file, solutions)
 
     if 'approx' in alg:
         _check_run(in_dir=in_dir, out_dir=out_dir, alg_name='Approx', timeout=1, run=run, seed=None)
         solutions = _get_result(in_dir=in_dir, out_dir=out_dir, alg_name='Approx', timeout=1, seed=None)
-        output_file = out_dir + 'approx_table.tex'
+        output_file = out_dir + 'eva/' + 'approx_table.tex'
         _output_table(output_file, solutions)
 
     if 'ls1' in alg:
@@ -61,7 +63,7 @@ def table_out(in_dir: str, out_dir: str, alg: list, run: bool) -> None:
         solutions['_time'] /= len(ls_seed_list)
         solutions['_qual'] /= len(ls_seed_list)
         solutions['_error'] /= len(ls_seed_list)
-        output_file = out_dir + 'ls1_table.tex'
+        output_file = out_dir + 'eva/' + 'ls1_table.tex'
         _output_table(output_file, solutions)
     if 'ls2' in alg:
         for seed in ls_seed_list:
@@ -76,5 +78,5 @@ def table_out(in_dir: str, out_dir: str, alg: list, run: bool) -> None:
         solutions['_time'] /= len(ls_seed_list)
         solutions['_qual'] /= len(ls_seed_list)
         solutions['_error'] /= len(ls_seed_list)
-        output_file = out_dir + 'ls2_table.tex'
+        output_file = out_dir + 'eva/' + 'ls2_table.tex'
         _output_table(output_file, solutions)

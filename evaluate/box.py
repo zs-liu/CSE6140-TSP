@@ -44,6 +44,6 @@ def box_out(in_dir: str, out_dir: str, alg: list, run: bool):
             ax.boxplot(time_lists, whis=(0.0, 100.0), labels=label_lists)
             plt.tight_layout()
             # ax.legend(loc='best')
-            fig_file = out_dir + _alg + instance.lower() + '_box.pdf'
+            fig_file = out_dir + 'eva/' + _alg + instance.lower() + '_box.pdf'
             fig.savefig(fig_file)
             plt.close(fig)

@@ -1,7 +1,10 @@
 import subprocess
 import argparse
+import os
 
 if __name__ == '__main__':
+
+
     parser = argparse.ArgumentParser()
     parser.add_argument('-out', action='store', dest='out', default='table', choices=['table', 'qrtd', 'sqd', 'box'])
     parser.add_argument('-i', action='store', dest='i', default='DATA/')
@@ -10,6 +13,11 @@ if __name__ == '__main__':
     parser.add_argument('-alg', action='store', dest='alg', default='all',
                         choices=['BnB', 'Approx', 'LS1', 'LS2', 'all'])
     args, unknown = parser.parse_known_args()
+    if not os.path.exists(args.o):
+        os.makedirs(args.o)
+    if not os.path.exists(args.o + 'eva/'):
+        os.makedirs(args.o + 'eva/')
+
 
     if args.run == 'T':
         args.run = True
