@@ -16,7 +16,7 @@ class Graph:
                 if line == 'EOF':
                     break
                 _, coord_x, coord_y = line.split(' ')
-                coords.append((coord_x, coord_y))
+                coords.append((float(coord_x), float(coord_y)))
         coords = np.array(coords)
         self._n = len(coords)
         # calculate distance
