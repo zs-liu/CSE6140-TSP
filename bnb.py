@@ -43,10 +43,11 @@ class BranchAndBound:
                         # checking if upper bound needs to be updated
                         if not self.winner or self.winner.bound_val > last_state.bound_val:
                             i += 1
+                            last_state.path = [ele-1 for ele in last_state.path]
                             self.results.append(
-                                (last_state.path, last_state.path_cost, time.time() - self.begin_time))
+                                (last_state.path, time.time() - self.begin_time, last_state.path_cost ))
                             print("Solution" + str(i) + ": ",
-                                  (last_state.path, last_state.path_cost, time.time() - self.begin_time))
+                                  (last_state.path, time.time() - self.begin_time, last_state.path_cost))
                             self.winner = last_state
                 else:
                     sorted_list = self.sort_edges(graph[last_state.path[-1]])
@@ -93,6 +94,7 @@ if __name__ == '__main__':
 
     args, unknown = parser.parse_known_args()
 
+
     city_dict = {}
     with open(args.inf) as f:
         while True:
@@ -117,28 +119,40 @@ if __name__ == '__main__':
                 graph.add_node(v)
                 graph.add_edge(u, v, weight=val)
     print(graph.number_of_nodes(), "nnnnnn")
-    #np.random.seed(int(args.seed))
+
     # test with relative path
     trace_file = '{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'bnb',
-                                            args.time)
+                                         args.time)
     if os.path.isfile(trace_file):
         os.remove(trace_file)
 
-
     bnb = BranchAndBound(graph, args.time)
     tour = bnb.generate_tour()
-    print (tour)
+    #print (tour)
+
     # output solution file
     solution_file = '{}_{}_{}.sol'.format('output/' + args.inf.split('/')[-1][:-4], 'bnb',
-                                             args.time)
-    with open(solution_file, 'w+') as f:
-        #f.write(str(distance))
-        f.write('\n')
-        f.write(','.join(map(str, tour)))
+                                                 args.time)
 
+    # output trace file
     trace_file = '{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'bnb',
                                             args.time)
-    delta = time.time() - start
-    #ith open(trace_file, 'a') as f:
-        #f.write('{:.2f}, {}\n'.format(delta, distance))
 
+    distance = tour[-1][2]
+    trace_list = []
+    for line in tour:
+        print(line[1])
+        round2 = round(line[1], 2)
+        trace_list.append([round2, line[2]])
+
+    def process_dormat(trace_one):
+        return "{:.2f},{:d}".format(trace_one[0], trace_one[1])
+
+
+    with open(trace_file, 'w+') as f:
+        f.write('\n'.join(map(process_dormat, trace_list)))
+
+
+    with open(solution_file, 'w') as f:
+        f.write('{}\n'.format(distance))
+        f.write(','.join(map(str,tour[-1][0])))
