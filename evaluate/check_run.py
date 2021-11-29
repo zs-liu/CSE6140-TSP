@@ -14,8 +14,11 @@ def _check_run(in_dir: str, out_dir: str, alg_name: str, timeout: int, run: bool
         else:
             file = '{}_{}_{}_{}.trace'.format(out_dir + row['Instance'], alg_name, timeout, seed)
         if os.path.isfile(file) is not True or run is True:
-            subprocess.run(args=['python3', alg_name.lower() + '.py',
-                                 '-inf', in_dir + row['Instance'] + '.tsp',
-                                 '-time', str(timeout),
-                                 '-seed', str(seed)],
-                           timeout=timeout)
+            try:
+                subprocess.run(args=['python3', alg_name.lower() + '.py',
+                                     '-inf', in_dir + row['Instance'] + '.tsp',
+                                     '-time', str(timeout),
+                                     '-seed', str(seed)],
+                               timeout=timeout)
+            except subprocess.TimeoutExpired:
+                pass
