@@ -138,7 +138,7 @@ if __name__ == '__main__':
     trace_file = '{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'bnb',
                                             args.time)
 
-    distance = tour[-1][1]
+    distance = tour[-1][2]
     trace_list = []
     for line in tour:
         print(line[1])
