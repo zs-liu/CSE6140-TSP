@@ -8,7 +8,7 @@ if __name__ == '__main__':
         os.makedirs('output/')
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('-inf', action='store', dest='inf')
+    parser.add_argument('-inst', action='store', dest='inf')
     parser.add_argument('-alg', action='store', dest='alg', default='BnB', choices=['BnB', 'Approx', 'LS1', 'LS2'])
     parser.add_argument('-time', action='store', dest='time', default=10)
     parser.add_argument('-seed', action='store', dest='seed', default=None)
