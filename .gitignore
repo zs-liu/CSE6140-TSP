@@ -5,6 +5,7 @@
 *.xml
 *.pyc
 *.pkl
+.DS_Store
 .idea/
 project_description.pdf
 DATA/
