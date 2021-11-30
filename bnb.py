@@ -1,14 +1,11 @@
 import argparse
-from typing import Dict
 import math
 import numpy as np
 import os
 import sys
 import time
 import networkx as nx
-
 from BranchState import BranchState
-from graph import Graph
 
 class BranchAndBound:
     def __init__(self, graph, limit=600):
@@ -118,7 +115,6 @@ if __name__ == '__main__':
                 graph.add_node(u)
                 graph.add_node(v)
                 graph.add_edge(u, v, weight=val)
-    print(graph.number_of_nodes(), "nnnnnn")
 
     # test with relative path
     trace_file = '{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'bnb',
@@ -128,31 +124,26 @@ if __name__ == '__main__':
 
     bnb = BranchAndBound(graph, args.time)
     tour = bnb.generate_tour()
-    #print (tour)
 
-    # output solution file
-    solution_file = '{}_{}_{}.sol'.format('output/' + args.inf.split('/')[-1][:-4], 'bnb',
-                                                 args.time)
-
-    # output trace file
-    trace_file = '{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'bnb',
-                                            args.time)
-
-    distance = tour[-1][2]
     trace_list = []
     for line in tour:
-        print(line[1])
         round2 = round(line[1], 2)
         trace_list.append([round2, line[2]])
 
     def process_dormat(trace_one):
         return "{:.2f},{:d}".format(trace_one[0], trace_one[1])
 
+    for i in range(len(tour)):
+        # output trace file
+        trace_file = '{}_{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'bnb',
+                                             args.time, i)
+        with open(trace_file, 'w') as f:
+            f.write('\n'.join(map(str, trace_list[i])))
 
-    with open(trace_file, 'w+') as f:
-        f.write('\n'.join(map(process_dormat, trace_list)))
-
-
-    with open(solution_file, 'w') as f:
-        f.write('{}\n'.format(distance))
-        f.write(','.join(map(str,tour[-1][0])))
+        # output solution file
+        solution_file = '{}_{}_{}_{}.sol'.format('output/' + args.inf.split('/')[-1][:-4], 'bnb',
+                                              args.time, i)
+        with open(solution_file, 'w+') as f:
+            distance = tour[i][2]
+            f.write('{}\n'.format(distance))
+            f.write(','.join(map(str,tour[i][0])))
