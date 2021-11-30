@@ -18,6 +18,10 @@ if __name__ == '__main__':
 
     # generate graph from adjacency matrix
     g = nx.from_numpy_matrix(graph.distance)
+    for u in range(g.number_of_nodes()):
+        for v in range(g.number_of_nodes()):
+            if u != v and not g.has_edge(u, v):
+                g.add_edge(u, v, weight=0)
     # generate MST, default Kruskal’s algorithm
     mst = nx.minimum_spanning_tree(g)
     # generate nodes in a depth-first-search pre-ordering starting at node 0

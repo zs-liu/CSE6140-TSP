@@ -25,6 +25,7 @@ class BranchAndBound:
         stack.append(initial_state)
         i = 0
 
+        have_solution = False
         while len(stack):
 
             last_state = stack.pop()
@@ -44,6 +45,10 @@ class BranchAndBound:
                                 f.write('\n')
                                 f.write(','.join(map(str, last_state.path)))
                             delta = time.time() - self.start
+                            if have_solution is False:
+                                with open(self.trace_file, 'w') as f:
+                                    pass
+                                have_solution = True
                             with open(self.trace_file, 'a') as f:
                                 f.write('{:.2f}, {}\n'.format(delta, last_state.path_cost))
                             self.winner = last_state
@@ -70,10 +75,28 @@ class BranchAndBound:
 
     def generate_tour(self):
         mat = np.zeros((self.g.number_of_nodes(), self.g.number_of_nodes()))
+
+        # generate a simple path to avoid no solution
+        init_path = list(range(self.g.number_of_nodes()))
+        init_cost = 0
+        for x, y in zip(init_path, init_path[1:] + [0]):
+            init_cost += self.g[x][y]['weight']
+        with open(self.solution_file, 'w+') as f:
+            f.write(str(init_cost))
+            f.write('\n')
+            f.write(','.join(map(str, init_path)))
+        delta = time.time() - self.start
+        with open(self.trace_file, 'a') as f:
+            f.write('{:.2f}, {}\n'.format(delta, init_cost))
+
         for i in range(self.g.number_of_nodes()):
             for j in range(self.g.number_of_nodes()):
                 if i != j:
-                    mat[i][j] = graph[i][j]['weight']
+                    try:
+                        mat[i][j] = self.g[i][j]['weight']
+                    except KeyError:
+                        print(i, j)
+                        raise KeyError
                 else:
                     mat[i][j] = sys.maxsize
         self.run_DFS(np.array(mat))
@@ -90,6 +113,11 @@ if __name__ == '__main__':
 
     graph = Graph(args.inf)
     graph = nx.from_numpy_matrix(graph.distance)
+
+    for u in range(graph.number_of_nodes()):
+        for v in range(graph.number_of_nodes()):
+            if u != v and not graph.has_edge(u, v):
+                graph.add_edge(u, v, weight=0)
 
     solution_file = '{}_{}_{}.sol'.format('output/' + args.inf.split('/')[-1][:-4], 'BnB', args.time)
     trace_file = '{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'BnB', args.time)
