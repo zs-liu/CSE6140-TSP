@@ -1,5 +1,7 @@
 # CSE6140-TSP
+
 Gatech CSE6140/CX4140 Fall 2021 TSP Project
+
 ## Code structure
 
 - `tsp_main.py`: program entry, has four arguments
@@ -21,9 +23,15 @@ Gatech CSE6140/CX4140 Fall 2021 TSP Project
         ```console
         python3 eva_main.py -out [table | qrtd | sqd | box] -i <input_path> -o <output_path> -run [T | F] -alg [BnB | Approx | LS1 | LS2 | all]
         ```
-- `evaluate/*`: evaluate results
+    - `evaluate/table.py`: output comprehensive tables
+    - `evaluate/qrtd.py`: output QRTD plots
+    - `evaluate/sqd.py`: output SQD plots
+    - `evaluate/parameters.py`: evaluation parameters
+    - `evaluate/check_run.py`: run algorithms if there are no running results
 - `graph.py`: load graph from datasets
 - `bnb.py`: solve TSP with Branch-and-Bound
-- `approx.py`: solve TSP with MST-APPROX
+- `approx.py`: solve TSP with MST Approximation
 - `ls1.py`: solve TSP with SA
 - `ls2.py`: solve TSP with 2-opt
+- `output/`: running results
+- `output/eva/`: evaluate results
