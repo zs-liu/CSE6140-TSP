@@ -43,7 +43,7 @@ class BranchAndBound:
                             with open(self.solution_file, 'w+') as f:
                                 f.write(str(last_state.path_cost))
                                 f.write('\n')
-                                f.write(','.join(map(str, last_state.path)))
+                                f.write(','.join(map(str, last_state.path[:-1])))
                             delta = time.time() - self.start
                             if have_solution is False:
                                 with open(self.trace_file, 'w') as f:

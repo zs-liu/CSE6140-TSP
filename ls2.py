@@ -60,7 +60,7 @@ if __name__ == '__main__':
             with open(solution_file, 'w') as f:
                 f.write(str(distance))
                 f.write('\n')
-                f.write(','.join(map(str, tour)))
+                f.write(','.join(map(str, tour[:-1])))
 
             trace_file = '{}_{}_{}_{}.trace'.format('output/' + args.inf.split('/')[-1][:-4], 'LS2',
                                                     args.time, args.seed)
